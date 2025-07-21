@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key')    // Jenkins Credential ID
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
-        AWS_DEFAULT_REGION = 'ap-south-1'
+        // Only needed if you are NOT using IAM role. Since you use IAM, this is optional.
+        // AWS_ACCESS_KEY_ID = credentials('your-aws-access-key-id')
+        // AWS_SECRET_ACCESS_KEY = credentials('your-aws-secret-access-key')
     }
 
     stages {
@@ -28,11 +28,12 @@ pipeline {
     }
 
     post {
-        success {
-            echo '✅ EC2 instance provisioned successfully.'
-        }
         failure {
             echo '❌ Build failed.'
         }
+        success {
+            echo '✅ Terraform Apply completed successfully.'
+        }
     }
 }
+
