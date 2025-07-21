@@ -1,10 +1,12 @@
 pipeline {
     agent any
-
+    environment {
+        AWS_REGION = "ap-south-1"
+    }
     stages {
-        stage('Clone Repository') {
+        stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/Rithish24-Cloud/terraform-ec2-deploy.git', branch: 'master'
+                git url: 'https://github.com/Rithish24-cloud/terraform-ec2-deploy.git'
             }
         }
 
@@ -20,14 +22,6 @@ pipeline {
             }
         }
     }
-
-    post {
-        failure {
-            echo '❌ Build failed.'
-        }
-        success {
-            echo '✅ Terraform Apply completed successfully.'
-        }
-    }
 }
+
 
