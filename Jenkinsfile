@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/<your-username>/terraform-ec2-pipeline.git'
+        git 'https://github.com/Rithish24-cloud/terraform-ec2-deploy.git'
       }
     }
 
